@@ -27,19 +27,21 @@ public class CommandLineOperations {
 		System.out.println("Enter your input command or Type \"F1\" for help");
 		try (Scanner scanner = new Scanner(System.in)) {
 			while (true) {
-				String commandInput = scanner.nextLine();
-				commandInput = null != commandInput ? commandInput.trim() : null;
-				// validate input commands
-				if (!validateInput(commandInput)) {
-					System.err.println("Invalid Input");
-				} else if (commandInput.startsWith("del") || commandInput.startsWith("ins")) {
-					executeCommand(commandInput);
-				} else {
-					executeCommand(commandInput, path);
+				try {
+					String commandInput = scanner.nextLine();
+					commandInput = null != commandInput ? commandInput.trim() : null;
+					// validate input commands
+					if (!validateInput(commandInput)) {
+						System.err.println("Invalid Input");
+					} else if (commandInput.startsWith("del") || commandInput.startsWith("ins")) {
+						executeCommand(commandInput);
+					} else {
+						executeCommand(commandInput, path);
+					}
+				} catch (Exception e) {
+					System.err.println("An error occured !!!");
 				}
 			}
-		} catch (Exception e) {
-			System.err.println("An error occured !!! ");
 		}
 	}
 
@@ -61,12 +63,12 @@ public class CommandLineOperations {
 		if ("del".equalsIgnoreCase(command[0])) {
 			lineEditor.delLine(RAW_CONTENT, lineNum);
 			textFrame.setText(convertListToString(RAW_CONTENT, IS_LISTED));
-			System.out.println(String.format("Deleted line number %s Successfully !!! ", lineNum));
+			System.out.println(String.format("Deleted line number %s Successfully !!!", lineNum));
 
 		} else if ("ins".equalsIgnoreCase(command[0])) {
 			lineEditor.insLine(RAW_CONTENT, lineNum, Arrays.asList(command).stream().skip(2).collect(Collectors.joining(" ")));
 			textFrame.setText(convertListToString(RAW_CONTENT, IS_LISTED));
-			System.out.println(String.format("Inserted line at line number %s Successfully !!! ", lineNum));
+			System.out.println(String.format("Inserted line at line number %s Successfully !!!", lineNum));
 		}
 	}
 

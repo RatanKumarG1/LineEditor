@@ -1,6 +1,7 @@
 package com.textEditor.test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +25,8 @@ public class LineEditorTest {
 		test.delLineTest();
 		test.insLineTest();
 		test.saveFileTest();
+		test.delLineTestZeroLinesTest();
+		test.insLineTestEmptyFileTest();
 	}
 	
 	String sampleText_actual = "Angular lets you start small and supports you as your team and apps grow.\n"
@@ -86,6 +89,28 @@ public class LineEditorTest {
 			System.err.println("Error: Save file test case failed");
 		else
 			System.out.println("Save file  test case passed");
+	}
+	
+	public void delLineTestZeroLinesTest() {
+		List<String> emptyLines = new ArrayList<>();
+		try {
+			lineEditor.delLine(emptyLines, 2);
+		} catch (Exception e) {}
+		if(emptyLines.size() == 0)
+			System.out.println("Empty file delete line test case passed");
+		else
+			System.err.println("Error: Empty file delete line test case failed");
+	}
+	
+	public void insLineTestEmptyFileTest() {
+		List<String> emptyLines = new ArrayList<>();
+		try {
+			lineEditor.insLine(emptyLines, 2, "Some text written");
+		} catch (Exception e) {}
+		if(emptyLines.size() == 0)
+			System.out.println("Empty file insert line test case passed");
+		else
+			System.err.println("Error: Empty file insert line test case failed");
 	}
 	
 	private String convertListToString(List<String> allLines) {
