@@ -1,0 +1,4 @@
+Angular lets you start small and supports you as your team and apps grow.
+Some random text.
+Join the millions of developers building with Angular in a thriving and friendly community.
+Rely on Angular's internationalization tools, security, and accessibility to build for everyone around the world.
